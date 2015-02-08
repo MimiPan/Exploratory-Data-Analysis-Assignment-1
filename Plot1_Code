@@ -8,8 +8,7 @@ dataset<-household_power_consumption[household_power_consumption$Date %in% c("1/
 detach(household_power_consumption)
 attach(dataset)
 View(dataset)
-dataset$Date<-as.Date(dataset$Date, format="%d/%m/%Y")
-dataset$Time<-strptime(dataset$Time, format="", tz= "")
+Date_Time <- strptime(paste(dataset$Date, dataset$Time, sep=" "), "%d/%m/%Y %H:%M:%S") 
 
 
 ###To create the plot 
