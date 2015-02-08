@@ -1,0 +1,17 @@
+# Plot 2
+#loading and subsetting
+setwd("~/Coursera")
+household_power_consumption <- read.csv("~/Coursera/household_power_consumption.txt", sep=";", stringsAsFactors=FALSE)
+attach(household_power_consumption)
+dataset<-household_power_consumption[household_power_consumption$Date %in% c("1/2/2007","2/2/2007") ,]
+detach(household_power_consumption)
+attach(dataset)
+View(dataset)
+dataset$Date<-as.Date(dataset$Date, format="%d/%m/%Y")
+Date_Time <- strptime(paste(dataset$Date, dataset$Time, sep=" "), "%d/%m/%Y %H:%M:%S") 
+
+#the plot
+active_power<-as.numeric(dataset$Global_active_power)
+png("plot2.png", width=480, height=480)
+plot(Date_Time, active_power, type="l", ylab="Global Active Power (kilowatts)")
+dev.off()
